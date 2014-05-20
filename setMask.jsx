@@ -34,7 +34,7 @@ function getSets(layerSets) {
 }
 
 
-// Set Classs
+// Set Class
 function Set(ref) {
     this.ref = ref;
     this.oldSel;
@@ -86,7 +86,7 @@ function Set(ref) {
         var idMsk = charIDToTypeID( "Msk " );
         ref14.putEnumerated( idChnl, idChnl, idMsk );
         var idLyr = charIDToTypeID( "Lyr " );
-        ref14.putIdentifier( idLyr, dest ); //FIXME use ID instead
+        ref14.putIdentifier( idLyr, dest );
         desc18.putReference( idAt, ref14 );
         var idUsng = charIDToTypeID( "Usng" );
         var ref15 = new ActionReference();
