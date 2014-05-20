@@ -7,14 +7,17 @@ function setLayersetMask() {
     var activeSet = new Set(doc.activeLayer);
     var lSets = getSets(doc.layerSets);
 
-    for (var i=0; i<lSets.length; i++) {
-        if (lSets[i].ref.name == activeSet.ref.name && lSets[i].getID() != activeSet.getID()) {
-                if (lSets[i].hasMask()) {
-                    lSets[i].deleteMask();
-                };
-                activeSet.copyMask(lSets[i].getID())
-        };
-    };
+    if (activeSet.hasMask()) {
+        for (var i=0; i<lSets.length; i++) {
+            if (lSets[i].ref.name == activeSet.ref.name && lSets[i].getID() != activeSet.getID()) {
+                    if (lSets[i].hasMask()) {
+                        lSets[i].deleteMask();
+                    }
+                    activeSet.copyMask(lSets[i].getID())
+            }
+        }
+    }
+    else { alert ('This Layer Set has no mask to sync!', 'syncMask', 'errorIcon'); }
 }
 
 
