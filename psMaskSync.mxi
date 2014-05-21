@@ -14,7 +14,7 @@
   <ui-access>  
     <![CDATA[
       <p style = "font-weight: bold; color: white">Access:</p>
-      You can access the Quick Save Maps tools from the File -&gt; Scripts Menu. It is recommended to install the actions that shipped with the product.
+      You can access the psMaskSync tools from the File -&gt; Scripts Menu. It is recommended to install the actions that shipped with the product.
     ]]>  
   </ui-access>  
   <files>
