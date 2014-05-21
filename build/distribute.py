@@ -26,10 +26,15 @@ def getConfig():
     return Tools(extMan, zip7)
 
 
-def process():
+def package():
+    try:
+        os.remove(MXP)
+    except:
+        pass
+
     tools = getConfig()
     subprocess.call('{0} -package mxi={1} mxp={2}'.format(tools.extMan, MXI, MXP))
 
 
 if __name__ == '__main__':
-    process()
+    package()
