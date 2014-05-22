@@ -13,6 +13,12 @@ UI();
 
 function UI() {
     var window = new Window('dialog', 'Create Material');
+        //Material Group
+        var matGroup = window.add('group')
+            for (var i=0; i<doc.layerSets.length; i++) {
+                matGroup.add('checkbox', undefined, doc.layerSets[i].name);
+            }
+    
         // NameGroup
         var nameGroup = window.add('group');
             nameGroup.add('statictext', undefined, 'Name:');
