@@ -1,4 +1,12 @@
-#target photoshop
+﻿#target photoshop
+
+/*
+<javascriptresource>
+    <name>psMaskSync - Create Material</name>
+    <category>psMaskSync</category>
+</javascriptresource>
+*/
+
 var doc = app.activeDocument;
 
 UI();

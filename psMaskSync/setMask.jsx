@@ -1,4 +1,12 @@
-#target photoshop
+﻿#target photoshop
+
+/*
+<javascriptresource>
+    <name>psMaskSync - Sync</name>
+    <category>psMaskSync</category>
+</javascriptresource>
+*/
+
 var doc = app.activeDocument;
 
 setLayersetMask();
