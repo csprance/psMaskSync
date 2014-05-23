@@ -25,6 +25,14 @@ function UI() {
             var btnOk = btnGrp.add('button', undefined, 'Ok');
             btnOk.onClick = function() {window.close()};
             var btnCancel = btnGrp.add('button', undefined, 'Cancel');
+            
+    this.matNames = function(matList) {
+        var matNames = [];
+        for (var i=0; i<matList.length; i++) {
+            matNames.push(matList[i].text);
+        }
+        return matNames;
+        };
     window.show();
 }
 
