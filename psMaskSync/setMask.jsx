@@ -9,7 +9,22 @@
 
 var doc = app.activeDocument;
 
-setLayersetMask();
+UI();
+
+function UI() {
+    var window = new Window('dialog', 'Select Masks to Sync');
+        var matGrp = window.add('group')
+            var matList = [];
+            for (var i=0; i<doc.layerSets.length; i++) {
+                matList.push(matGrp.add('checkbox', undefined, doc.layerSets[i].name));
+            }
+    
+        var btnGrp = window.add('group');
+            var btnOk = btnGrp.add('button', undefined, 'Ok');
+            btnOk.onClick = function() {window.close()};
+            var btnCancel = btnGrp.add('button', undefined, 'Cancel');
+    window.show();
+}
 
 function setLayersetMask() {
     var activeSet = new Set(doc.activeLayer);
