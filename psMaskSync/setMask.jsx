@@ -7,6 +7,8 @@
 </javascriptresource>
 */
 
+#include "pbLib.jsxinc"
+
 var doc = app.activeDocument;
 
 UI();
