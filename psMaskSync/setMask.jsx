@@ -42,7 +42,7 @@ function setLayersetMask() {
             }
         }
     }
-    else { alert ('This Layer Set has no mask to sync!', 'syncMask', 'errorIcon'); }
+    else { alert ('This Layer Set has no mask to sync!', 'psMaskSync', 'errorIcon'); }
 }
 
 
