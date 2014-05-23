@@ -1,0 +1,7 @@
+﻿//Creats indexOf() array method in adobe JS
+if (typeof Array.prototype.indexOf != "function") {
+    Array.prototype.indexOf = function (el) {
+        for(var i = 0; i < this.length; i++) if(el === this[i]) return i;
+        return -1;
+        }
+}
