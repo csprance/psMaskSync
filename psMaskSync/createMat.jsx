@@ -1,11 +1,12 @@
 ﻿#target photoshop
-
 /*
 <javascriptresource>
     <name>psMaskSync - Create Material</name>
     <category>psMaskSync</category>
 </javascriptresource>
 */
+
+#include "pbLib.jsxinc"
 
 var doc = app.activeDocument;
 
@@ -15,8 +16,9 @@ function UI() {
     var window = new Window('dialog', 'Create Material');
         //Material Group
         var matGroup = window.add('group')
+            var matList = [];
             for (var i=0; i<doc.layerSets.length; i++) {
-                matGroup.add('checkbox', undefined, doc.layerSets[i].name);
+                matList.push(matGroup.add('checkbox', undefined, doc.layerSets[i].name));
             }
     
         // NameGroup
@@ -31,6 +33,15 @@ function UI() {
             btnOk.onClick = function() {createMat(nameEdit.text); window.close()};
             var btnCancel = btnGroup.add('button', undefined, 'Cancel');
         window.show();
+        
+    //Methods
+    this.rebuildMatsList = function(matList) {
+        var matNames = [];
+        for (var i=0; i<matlist.length; i++) {
+            if (matlist[i].value == 1) {matNames.push(matlist[i].text)}
+        }
+    return matNames;
+    };
 }
 
 
@@ -44,7 +55,7 @@ function createMat(name) {
 }
 
 
-function makeLayerMask(maskType) {
+function makeLayerMask(maskType, maps) {
     if( maskType == undefined) maskType = 'RvlS' ; //from selection
     //requires a selection 'RvlS'  complete mask 'RvlA' otherThanSelection 'HdSl'
     var desc140 = new ActionDescriptor();
