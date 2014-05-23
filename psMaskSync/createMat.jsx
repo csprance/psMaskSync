@@ -39,16 +39,25 @@ function UI() {
         //Buttons Group
         var btnGroup = window.add('group');
             var btnOk = btnGroup.add('button', undefined, 'Ok');
-            btnOk.onClick = function() {createMat(nameEdit.text, this.rebuildMatsList(matList)); window.close()};
+            btnOk.onClick = function() {createMat(nameEdit.text, rebuildMatList(matList)); window.close()};
             var btnCancel = btnGroup.add('button', undefined, 'Cancel');
         window.show();
 }
 
 
+function rebuildMatList(matList) {
+    var matNames = [];
+    for (var i=0; i<matList.length; i++) {
+        if (matList[i].value == 1) {matNames.push(matList[i].text)}
+    }
+    return matNames;
+};
+
+
 function createMat(name, matList) {
     var layerSets = doc.layerSets;
     for (var i=0; i<layerSets.length; i++) {
-        if (matList.indexOf(doc.LayerSets[i].name) > -1) {
+        if (matList.indexOf(layerSets[i].name) > -1) {
             var newSet = layerSets[i].layerSets.add()
             newSet.name = name;
             makeLayerMask('RvlA');
