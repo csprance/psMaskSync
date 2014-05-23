@@ -5,3 +5,11 @@ if (typeof Array.prototype.indexOf != "function") {
         return -1;
         }
 }
+
+function intersect(a, b) {
+    var t;
+    if (b.length > a.length) t = b, b = a, a = t;
+    return a.filter(function(e) {
+        if (b.indexOf(e) !== -1) return true;
+    });
+}
