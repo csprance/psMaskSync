@@ -27,12 +27,6 @@ if (!Array.prototype.filter)
       if (i in t)
       {
         var val = t[i];
-
-        // NOTE: Technically this should Object.defineProperty at
-        //       the next index, as push can be affected by
-        //       properties on Object.prototype and Array.prototype.
-        //       But that method's new, and collisions should be
-        //       rare, so use the more-compatible alternative.
         if (fun.call(thisArg, val, i, t))
           res.push(val);
       }
@@ -49,4 +43,13 @@ function intersect(a, b) {
     return a.filter(function(e) {
         if (b.indexOf(e) !== -1) return true;
     });
+}
+
+
+String.prototype.fuzzy = function(s)
+{
+    var hay = this.toLowerCase(), i = 0, n = -1, l;
+    s = s.toLowerCase();
+    for(; l=s[i++] ;) if (!~(n = hay.indexOf(l, n + 1))) return false;
+    return true;
 }
