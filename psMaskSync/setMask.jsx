@@ -1,4 +1,5 @@
 ﻿#target photoshop
+#include "pbLib.jsxinc"
 
 /*
 <javascriptresource>
@@ -9,11 +10,62 @@
 
 var doc = app.activeDocument;
 
-setLayersetMask();
+UI();
 
-function setLayersetMask() {
+function UI() {
+    //Methods
+     this.getMats = function() 
+    {
+        var matNames = [];
+        for (var i=0; i<matList.length; i++) 
+        {
+            if (this.matList[i].value == 1) {matNames.push(this.matList[i].text)}
+        }
+        var layerSets = doc.layerSets;
+        var sets = [];
+        for (var i=0; i<layerSets.length; i++)
+        {
+            if (matNames.indexOf(layerSets[i].name) > -1) {sets.push(layerSets[i])}
+        }
+    return sets;
+    };
+
+    var self = this; // Allows this ref via self in callbacks
+    var window = new Window('dialog', 'Select Masks to Sync');
+        var matGrp = window.add('group')
+            this.matList = [];
+            for (var i=0; i<doc.layerSets.length; i++) {
+                matList.push(matGrp.add('checkbox', undefined, doc.layerSets[i].name));
+            }
+    
+        var btnGrp = window.add('group');
+            var btnOk = btnGrp.add('button', undefined, 'Ok');
+            btnOk.onClick = function() {setLayersetMask(self.getMats());window.close()};
+            var btnCancel = btnGrp.add('button', undefined, 'Cancel');
+    window.show();
+    
+    //Methods
+     this.getMats = function() 
+    {
+        var matNames = [];
+        for (var i=0; i<matList.length; i++) 
+        {
+            if (this.matList[i].value == 1) {matNames.push(this.matList[i].text)}
+        }
+        var layerSets = doc.layerSets;
+        var sets = [];
+        for (var i=0; i<layerSets.length; i++)
+        {
+            if (matNames.indexOf(layerSets[i].name) > -1) {sets.push(layerSets[i])}
+        }
+    return sets;
+    };
+}
+
+
+function setLayersetMask(layerSets) {
     var activeSet = new Set(doc.activeLayer);
-    var lSets = getSets(doc.layerSets);
+    var lSets = getSets(layerSets);
 
     if (activeSet.hasMask()) {
         for (var i=0; i<lSets.length; i++) {

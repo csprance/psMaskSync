@@ -1,4 +1,6 @@
 ﻿#target photoshop
+#include "pbLib.jsxinc"
+
 /*
 <javascriptresource>
     <name>psMaskSync - Create Material</name>
@@ -6,52 +8,43 @@
 </javascriptresource>
 */
 
-#include "pbLib.jsxinc"
-
 var doc = app.activeDocument;
 
 UI();
 
 function UI() {
     //Methods
-    this.rebuildMatsList = function(matList) {
+    this.getMats = function() {
         var matNames = [];
-        for (var i=0; i<matlist.length; i++) {
-            if (matlist[i].value == 1) {matNames.push(matlist[i].text)}
+        for (var i=0; i<this.matList.length; i++) {
+            if (this.matList[i].value == 1) {matNames.push(this.matList[i].text)}
         }
     return matNames;
     };
+    var self = this; // allows this ref via self in callbacks.
 
     var window = new Window('dialog', 'Create Material');
            //Material Group
-        var matGroup = window.add('group')
-            var matList = [];
+        var matGroup = window.add('group');
+            this.matList = [];
             for (var i=0; i<doc.layerSets.length; i++) {
-                matList.push(matGroup.add('checkbox', undefined, doc.layerSets[i].name));
+                this.matList.push(matGroup.add('checkbox', undefined, doc.layerSets[i].name));
             }
     
         // NameGroup
         var nameGroup = window.add('group');
             nameGroup.add('statictext', undefined, 'Name:');
             var nameEdit = nameGroup.add('edittext');
+            nameGroup.add
                 nameEdit.characters = 16;
                 
         //Buttons Group
         var btnGroup = window.add('group');
             var btnOk = btnGroup.add('button', undefined, 'Ok');
-            btnOk.onClick = function() {createMat(nameEdit.text, rebuildMatList(matList)); window.close()};
+            btnOk.onClick = function() {createMat(nameEdit.text, self.getMats()); window.close()};
             var btnCancel = btnGroup.add('button', undefined, 'Cancel');
         window.show();
 }
-
-
-function rebuildMatList(matList) {
-    var matNames = [];
-    for (var i=0; i<matList.length; i++) {
-        if (matList[i].value == 1) {matNames.push(matList[i].text)}
-    }
-    return matNames;
-};
 
 
 function createMat(name, matList) {
