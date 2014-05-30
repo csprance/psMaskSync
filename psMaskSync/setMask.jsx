@@ -14,26 +14,52 @@ var doc = app.activeDocument;
 UI();
 
 function UI() {
+    this.matNames = function() 
+    {
+        var matNames = [];
+        for (var i=0; i<matList.length; i++) 
+        {
+            if (matList[i].value == 1) {matNames.push(matList[i].text)}
+        }
+        return matNames;
+    };
+
+    var self = this;
+    
     var window = new Window('dialog', 'Select Masks to Sync');
         var matGrp = window.add('group')
-            var matList = [];
+            this.matList = [];
             for (var i=0; i<doc.layerSets.length; i++) {
                 matList.push(matGrp.add('checkbox', undefined, doc.layerSets[i].name));
             }
     
         var btnGrp = window.add('group');
             var btnOk = btnGrp.add('button', undefined, 'Ok');
-            btnOk.onClick = function() {window.close()};
+            btnOk.onClick = function() {$.writeln(mats(self.matNames())); window.close()};
             var btnCancel = btnGrp.add('button', undefined, 'Cancel');
-            
-    this.matNames = function(matList) {
+    window.show();
+    
+    //Methods
+     this.matNames = function() 
+    {
         var matNames = [];
-        for (var i=0; i<matList.length; i++) {
-            matNames.push(matList[i].text);
+        for (var i=0; i<matList.length; i++) 
+        {
+            if (this.matList[i].value == 1) {matNames.push(this.matList[i].text)}
         }
         return matNames;
-        };
-    window.show();
+    };
+}
+
+function mats(matList) {
+    var layerSets = doc.layerSets;
+    var sets = [];
+    for (var i=0; i<layerSets.length; i++) {
+        if (matList.indexOf(layerSets[i].name) > -1) {
+            sets.push(layerSets[i]);
+        }
+    }
+    return sets;
 }
 
 function setLayersetMask() {
