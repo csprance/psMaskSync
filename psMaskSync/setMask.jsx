@@ -35,7 +35,7 @@ function UI() {
     
         var btnGrp = window.add('group');
             var btnOk = btnGrp.add('button', undefined, 'Ok');
-            btnOk.onClick = function() {$.writeln(mats(self.matNames())); window.close()};
+            btnOk.onClick = function() {setLayersetMask(mats(self.matNames())); window.close()};
             var btnCancel = btnGrp.add('button', undefined, 'Cancel');
     window.show();
     
@@ -62,9 +62,9 @@ function mats(matList) {
     return sets;
 }
 
-function setLayersetMask() {
+function setLayersetMask(layerSets) {
     var activeSet = new Set(doc.activeLayer);
-    var lSets = getSets(doc.layerSets);
+    var lSets = getSets(layerSets);
 
     if (activeSet.hasMask()) {
         for (var i=0; i<lSets.length; i++) {
