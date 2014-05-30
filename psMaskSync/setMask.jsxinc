@@ -10,8 +10,6 @@
 
 var doc = app.activeDocument;
 
-UI();
-
 function UI() {
     //Methods
      this.getMats = function() 
