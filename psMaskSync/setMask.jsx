@@ -1,4 +1,5 @@
 ﻿#target photoshop
+#include "pbLib.jsxinc"
 
 /*
 <javascriptresource>
@@ -7,25 +8,29 @@
 </javascriptresource>
 */
 
-#include "pbLib.jsxinc"
-
 var doc = app.activeDocument;
 
 UI();
 
 function UI() {
-    this.matNames = function() 
+    //Methods
+     this.getMats = function() 
     {
         var matNames = [];
         for (var i=0; i<matList.length; i++) 
         {
-            if (matList[i].value == 1) {matNames.push(matList[i].text)}
+            if (this.matList[i].value == 1) {matNames.push(this.matList[i].text)}
         }
-        return matNames;
+        var layerSets = doc.layerSets;
+        var sets = [];
+        for (var i=0; i<layerSets.length; i++)
+        {
+            if (matNames.indexOf(layerSets[i].name) > -1) {sets.push(layerSets[i])}
+        }
+    return sets;
     };
 
-    var self = this;
-    
+    var self = this; // Allows this ref via self in callbacks
     var window = new Window('dialog', 'Select Masks to Sync');
         var matGrp = window.add('group')
             this.matList = [];
@@ -35,32 +40,28 @@ function UI() {
     
         var btnGrp = window.add('group');
             var btnOk = btnGrp.add('button', undefined, 'Ok');
-            btnOk.onClick = function() {setLayersetMask(mats(self.matNames())); window.close()};
+            btnOk.onClick = function() {setLayersetMask(self.getMats());window.close()};
             var btnCancel = btnGrp.add('button', undefined, 'Cancel');
     window.show();
     
     //Methods
-     this.matNames = function() 
+     this.getMats = function() 
     {
         var matNames = [];
         for (var i=0; i<matList.length; i++) 
         {
             if (this.matList[i].value == 1) {matNames.push(this.matList[i].text)}
         }
-        return matNames;
+        var layerSets = doc.layerSets;
+        var sets = [];
+        for (var i=0; i<layerSets.length; i++)
+        {
+            if (matNames.indexOf(layerSets[i].name) > -1) {sets.push(layerSets[i])}
+        }
+    return sets;
     };
 }
 
-function mats(matList) {
-    var layerSets = doc.layerSets;
-    var sets = [];
-    for (var i=0; i<layerSets.length; i++) {
-        if (matList.indexOf(layerSets[i].name) > -1) {
-            sets.push(layerSets[i]);
-        }
-    }
-    return sets;
-}
 
 function setLayersetMask(layerSets) {
     var activeSet = new Set(doc.activeLayer);
