@@ -1,7 +1,8 @@
 psMaskSync
 ==========
 
-Keeps layerSet masks in sync in Photoshop.
+Keeps layerSet masks in sync in Photoshop. This is desgined to work within a PBR workflow,
+to make painting material masks easier.
 
 Installation
 ------------
