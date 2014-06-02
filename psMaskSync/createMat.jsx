@@ -8,7 +8,9 @@
 </javascriptresource>
 */
 
-var doc = app.activeDocument;
+try {
+    var doc = app.activeDocument;}
+catch(e) {alert('No Active Documeant to work on!', 'psMaskSync', 'erroricon')}
 
 UI();
 
