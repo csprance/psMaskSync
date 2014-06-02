@@ -5,7 +5,8 @@ import subprocess
 
 BASE = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 MXI = os.path.join(BASE, 'psMaskSync.mxi')
-MXP = os.path.join(BASE, 'psMaskSync.mxp')
+MXP = os.path.join(BASE, 'psMaskSync_CS4.mxp')
+ZXP = os.path.join(BASE, 'psMaskSync_CS5Plus.zxp')
 
 BUILDCONFIG = os.path.join(os.path.dirname(__file__), 'config.ini')
 
@@ -34,6 +35,7 @@ def package():
 
     tools = getConfig()
     subprocess.call('{0} -package mxi={1} mxp={2}'.format(tools.extMan, MXI, MXP))
+    subprocess.call('{0} -package mxi={1} zxp={2}'.format(tools.extMan, MXI, ZXP))
 
 
 if __name__ == '__main__':
