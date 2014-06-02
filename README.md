@@ -6,11 +6,11 @@ to make painting material masks easier.
 
 Installation
 ------------
-For Photoshop CS4 to CS6:
-Double click the psMaskSyncCS.mxp package, to let Adobe Extension Manager install it.
+For Photoshop CS4:
+Double click the ```psMaskSync_CS4.mxp``` package, to let Adobe Extension Manager install it.
 
-For Photoshop CC:
-Double click the psMaskSyncCC.zxp pacakge to let Adobe Extension Manager install it.
+For Photoshop CS5 or higher:
+Double click the ```psMaskSync_CS5Plus.zxp``` pacakge to let Adobe Extension Manager install it.
 
 Install Actions:
 If you want access to these scripts in the actions pallet, go to 
